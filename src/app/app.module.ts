@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TheLibModule } from 'projects/the-lib/src/public-api';
 
 import { AppComponent } from './app.component';
 
@@ -8,6 +9,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    TheLibModule,
     BrowserModule
   ],
   providers: [],

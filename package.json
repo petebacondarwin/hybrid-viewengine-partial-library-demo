@@ -2,12 +2,9 @@
   "name": "hybrid-viewengine-partial-library-demo",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "start-view-engine": "ng serve -c view-engine",
+    "build-library": "tsc -p scripts && node scripts/build-library.js"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +24,12 @@
     "@angular-devkit/build-angular": "~0.1200.0-next.3",
     "@angular/cli": "~12.0.0-next.3",
     "@angular/compiler-cli": "~12.0.0-next.3",
+    "@types/glob": "^7.1.3",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "@types/shelljs": "^0.8.8",
     "codelyzer": "^6.0.0",
+    "glob": "^7.1.6",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
     "karma": "~6.1.0",
@@ -37,7 +37,9 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^12.0.0-next.0",
     "protractor": "~7.0.0",
+    "shelljs": "^0.8.4",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"

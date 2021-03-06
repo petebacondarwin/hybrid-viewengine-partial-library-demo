@@ -1,27 +1,40 @@
-# HybridViewenginePartialLibraryDemo
+# Hybrid ViewEngine/Partial Library Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0-next.3.
+This project demos that it is possible to hack together a hybrid library that publishes both ViewEngine code and Ivy code (partially compiled).
+This library can then be consumed by both ViewEngine apps and Ivy apps (via the linker).
 
-## Development server
+The requirement is that the application project is built by the CLI.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Build the library
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To build the hybrid distributable run:
 
-## Build
+```
+yarn build-library
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This scripts builds both ViewEngine and Ivy versions of the library, then merges the files together in a way that can be consumed by either ViewEngine or Ivy applications.
 
-## Running unit tests
+The script does the following steps:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Build both partial and view-engine versions of the library.
+- Move the partial FESM2015 format to the view-engine dist folder.
+- Overwrite the view-engine typings files with the ones from the partial build.
+- Update the package.json to point CLI to the partial build for FESM2015 and to tell ngcc not to touch these files.
 
-## Running end-to-end tests
+## Serve the application (Ivy)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
+yarn serve
+```
 
-## Further help
+Note that ngcc runs to compile the standard Angular packages but not the `theLib` package.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Serve the application (ViewEngine)
+
+```
+yarn serve -c view-engine
+```
+
+Note that despite the library containing partially compiled ivy code, it can still be consumed by a ViewEngine project.
